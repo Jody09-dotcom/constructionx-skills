@@ -1,0 +1,174 @@
+{
+  "name": "constructionx-skills",
+  "owner": {
+    "name": "ConstructionX AI",
+    "email": "admin@constructionx.ai"
+  },
+  "plugins": [
+    {
+      "name": "site-diary",
+      "source": "./skills/site-diary",
+      "description": "Generate a daily UK construction site diary from a brief site-manager input. Captures weather, labour, plant, deliveries, works completed, delays, incidents, visitors, photos. UK construction conventions.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "construction",
+        "uk",
+        "site-diary",
+        "daily-diary",
+        "site-log",
+        "site-manager",
+        "construction-record",
+        "citb",
+        "hse",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "construction",
+        "uk",
+        "site-diary",
+        "site-log",
+        "hse"
+      ]
+    },
+    {
+      "name": "rams-generator",
+      "source": "./skills/rams-generator",
+      "description": "Draft a UK construction Risk Assessment and Method Statement (RAMS) from a task description. Covers hazard identification, 5x5 risk matrix, control measures, PPE, sign-off block. Aligned to HSE 5-step risk assessment.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "construction",
+        "uk",
+        "rams",
+        "risk-assessment",
+        "method-statement",
+        "hse",
+        "health-and-safety",
+        "site-safety",
+        "ppe",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "construction",
+        "uk",
+        "rams",
+        "risk-assessment",
+        "hse"
+      ]
+    },
+    {
+      "name": "cdm-2015-check",
+      "source": "./skills/cdm-2015-check",
+      "description": "Check a UK construction project against CDM 2015 duty-holder requirements and determine F10 notifiability. Outputs duty-holder roles, F10 y/n with reasoning, pre-construction info checklist, construction phase plan checklist.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "construction",
+        "uk",
+        "cdm-2015",
+        "f10",
+        "duty-holders",
+        "principal-designer",
+        "principal-contractor",
+        "hse",
+        "compliance",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "construction",
+        "uk",
+        "cdm-2015",
+        "f10",
+        "hse"
+      ]
+    },
+    {
+      "name": "cis-verification",
+      "source": "./skills/cis-verification",
+      "description": "Walk a UK contractor through Construction Industry Scheme (CIS) subcontractor verification and calculate the correct deduction. Covers HMRC verification steps, 0/20/30% rate logic, materials exemption, CIS300 monthly return reminder.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "construction",
+        "uk",
+        "cis",
+        "cis-verification",
+        "hmrc",
+        "subcontractor",
+        "tax-deduction",
+        "cis300",
+        "payroll",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "construction",
+        "uk",
+        "cis",
+        "hmrc",
+        "tax"
+      ]
+    },
+    {
+      "name": "nhbc-lookup",
+      "source": "./skills/nhbc-lookup",
+      "description": "Look up NHBC Standards chapter requirements for a specific UK residential build element. Returns chapter pointer, key requirements summary, common failure points, and a link to the official chapter.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "construction",
+        "uk",
+        "nhbc",
+        "nhbc-standards",
+        "warranty",
+        "residential",
+        "housebuilding",
+        "quality",
+        "inspection",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "construction",
+        "uk",
+        "nhbc",
+        "warranty",
+        "residential"
+      ]
+    }
+  ]
+}
