@@ -2,6 +2,14 @@
 
 ConstructionX AI is a Norfolk-based AI automation partner for small UK construction firms, founded by Jody Murfit after 30+ years in construction. This pack is a set of five Claude Code skills written for how UK builders actually work. Site diaries, RAMS, CDM 2015, CIS, NHBC. UK regs, UK conventions, UK language. Free, MIT, use them as you like.
 
+<p align="center">
+  <img src="assets/site-diary.png" width="19%" alt="site-diary" />
+  <img src="assets/rams-generator.png" width="19%" alt="rams-generator" />
+  <img src="assets/cdm-2015-check.png" width="19%" alt="cdm-2015-check" />
+  <img src="assets/cis-verification.png" width="19%" alt="cis-verification" />
+  <img src="assets/nhbc-lookup.png" width="19%" alt="nhbc-lookup" />
+</p>
+
 ## Install
 
 Inside Claude Code, add the marketplace:
@@ -22,13 +30,13 @@ Then install any skill from the pack:
 
 ## Skills Included
 
-| Skill | What it does | Example trigger |
-|-------|--------------|-----------------|
-| site-diary | Generates a daily UK construction site diary from a brief site-manager input. | "Write up the site diary for today, Norfolk, 3 bricklayers, rain am, blockwork 1st lift complete." |
-| rams-generator | Drafts a UK RAMS (Risk Assessment and Method Statement) for a task. 5x5 risk matrix, hierarchy of control, PPE, sign-off block. | "Draft a RAMS for cutting a structural opening in a loadbearing block wall, two operatives, dust extraction." |
-| cdm-2015-check | Checks a project against CDM 2015 duty-holder requirements and works out F10 notifiability. | "Is this project notifiable? 45 working days, peak 12 workers, commercial client, new office fit-out." |
-| cis-verification | Walks a contractor through HMRC CIS verification and calculates the correct deduction. 0/20/30% logic, materials exemption, CIS300 reminder. | "I have a subbie invoice for 2,400 pounds including 600 materials, verify them and work out the deduction." |
-| nhbc-lookup | Looks up NHBC Standards chapter requirements for a build element. Returns chapter pointer, key requirements, common failure points, official URL. | "What does NHBC say about ground-bearing slab DPM installation?" |
+| | Skill | What it does | Example trigger |
+|---|-------|--------------|-----------------|
+| <img src="assets/site-diary.png" width="80" /> | **site-diary** | Generates a daily UK construction site diary from a brief site-manager input. | "Write up the site diary for today, Norfolk, 3 bricklayers, rain am, blockwork 1st lift complete." |
+| <img src="assets/rams-generator.png" width="80" /> | **rams-generator** | Drafts a UK RAMS (Risk Assessment and Method Statement) for a task. 5x5 risk matrix, hierarchy of control, PPE, sign-off block. | "Draft a RAMS for cutting a structural opening in a loadbearing block wall, two operatives, dust extraction." |
+| <img src="assets/cdm-2015-check.png" width="80" /> | **cdm-2015-check** | Checks a project against CDM 2015 duty-holder requirements and works out F10 notifiability. | "Is this project notifiable? 45 working days, peak 12 workers, commercial client, new office fit-out." |
+| <img src="assets/cis-verification.png" width="80" /> | **cis-verification** | Walks a contractor through HMRC CIS verification and calculates the correct deduction. 0/20/30% logic, materials exemption, CIS300 reminder. | "I have a subbie invoice for 2,400 pounds including 600 materials, verify them and work out the deduction." |
+| <img src="assets/nhbc-lookup.png" width="80" /> | **nhbc-lookup** | Looks up NHBC Standards chapter requirements for a build element. Returns chapter pointer, key requirements, common failure points, official URL. | "What does NHBC say about ground-bearing slab DPM installation?" |
 
 ## Who This Is For
 
