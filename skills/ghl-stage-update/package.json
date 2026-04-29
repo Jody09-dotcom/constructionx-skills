@@ -1,0 +1,27 @@
+{
+  "name": "ghl-stage-update",
+  "version": "1.0.0",
+  "description": "Move a GoHighLevel contact through pipeline stages with one command.",
+  "main": "scripts/run.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "run": "node scripts/run.js"
+  },
+  "keywords": [
+    "gohighlevel",
+    "ghl",
+    "crm",
+    "pipeline",
+    "sales",
+    "uk"
+  ],
+  "author": "Jody Murfit <admin@constructionx.ai>",
+  "license": "MIT",
+  "homepage": "https://constructionx.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jody09-dotcom/constructionx-skills"
+  }
+}
