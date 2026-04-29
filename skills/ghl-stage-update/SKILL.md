@@ -43,7 +43,7 @@ To find the values:
 
 Ask the user for the following. If anything is missing, ask one short follow-up question, do not guess.
 
-- **Contact** (required): Name or email. Name is fuzzy-matched; email is exact-matched.
+- **Contact** (required): Name or email. Name is fuzzy-matched; email is exact-matched. If multiple contacts share the same name and have no distinguishing email, the script returns the candidate list with IDs and you re-run with `--contact-id <id>` instead of `--contact`.
 - **Target stage** (required): The destination stage name. Fuzzy-matched against pipeline stages.
 - **Pipeline** (optional): Pipeline name. If omitted, the skill checks all pipelines and flags ambiguity if the contact has opportunities in more than one.
 - **Note** (optional): Free-text note appended to the contact's notes log with a timestamp.
@@ -55,7 +55,7 @@ Invoke the bundled script:
 
 ```bash
 node ${CLAUDE_PLUGIN_ROOT}/scripts/run.js \
-  --contact "{name or email}" \
+  (--contact "{name or email}" | --contact-id "{ghl contact id}") \
   --stage "{target stage}" \
   [--pipeline "{pipeline name}"] \
   [--note "{note text}"] \

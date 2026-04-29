@@ -101,14 +101,15 @@ async function findContact(query) {
   if (contacts.length === 0) return { match: null, candidates: [] };
   if (contacts.length === 1) return { match: contacts[0], candidates: contacts };
 
-  // Try exact email or full-name match before declaring ambiguity.
+  // Auto-pick only if exactly ONE contact exact-matches; otherwise return all
+  // candidates so the user disambiguates.
   const q = normalise(query);
-  const exact = contacts.find(c =>
+  const exactMatches = contacts.filter(c =>
     normalise(c.email) === q ||
     normalise(`${c.firstName || ''} ${c.lastName || ''}`) === q ||
     normalise(c.contactName) === q,
   );
-  if (exact) return { match: exact, candidates: contacts };
+  if (exactMatches.length === 1) return { match: exactMatches[0], candidates: contacts };
   return { match: null, candidates: contacts };
 }
 
@@ -135,7 +136,7 @@ function findStageInPipeline(pipeline, stageName) {
 }
 
 async function getOpportunitiesForContact(contactId) {
-  const data = await api('GET', `/contacts/${contactId}/opportunities`);
+  const data = await api('GET', `/opportunities/search?location_id=${LOCATION_ID}&contact_id=${contactId}`);
   return data.opportunities || [];
 }
 
@@ -158,26 +159,39 @@ async function main() {
 
   const args = parseArgs(process.argv);
   const contactQuery = args.contact;
+  const contactId = args['contact-id'] || null;
   const stageName = args.stage;
   const pipelineName = args.pipeline || null;
   const note = args.note || null;
   const nextFollowUp = args['next-follow-up'] || null;
 
-  if (!contactQuery || !stageName) {
-    return fail(2, 'Usage: node run.js --contact "<name or email>" --stage "<stage>" [--pipeline "<name>"] [--note "<text>"] [--next-follow-up YYYY-MM-DD]');
+  if ((!contactQuery && !contactId) || !stageName) {
+    return fail(2, 'Usage: node run.js (--contact "<name or email>" | --contact-id "<id>") --stage "<stage>" [--pipeline "<name>"] [--note "<text>"] [--next-follow-up YYYY-MM-DD]');
   }
 
   // 1. Find the contact.
-  const { match: contact, candidates } = await findContact(contactQuery);
-  if (!contact) {
-    if (candidates.length > 0) {
-      let lines = [`Multiple matching contacts for "${contactQuery}". Please disambiguate:`];
-      for (const c of candidates.slice(0, 10)) {
-        lines.push(`  - ${c.firstName || ''} ${c.lastName || ''} <${c.email || 'no-email'}>  id=${c.id}`);
-      }
-      return fail(3, lines.join('\n'));
+  let contact;
+  if (contactId) {
+    try {
+      const c = await api('GET', `/contacts/${contactId}`);
+      contact = c.contact || c;
+      if (!contact || !contact.id) return fail(4, `Contact id "${contactId}" not found.`);
+    } catch (err) {
+      return fail(4, `Contact id "${contactId}" not found: ${err.message}`);
     }
-    return fail(4, `Contact not found: "${contactQuery}".`);
+  } else {
+    const { match, candidates } = await findContact(contactQuery);
+    if (!match) {
+      if (candidates.length > 0) {
+        let lines = [`Multiple matching contacts for "${contactQuery}". Please disambiguate (re-run with --contact-id <id>):`];
+        for (const c of candidates.slice(0, 10)) {
+          lines.push(`  - ${c.firstName || ''} ${c.lastName || ''} <${c.email || 'no-email'}>  id=${c.id}`);
+        }
+        return fail(3, lines.join('\n'));
+      }
+      return fail(4, `Contact not found: "${contactQuery}".`);
+    }
+    contact = match;
   }
   const contactName = `${contact.firstName || ''} ${contact.lastName || ''}`.trim() || contact.contactName || contact.email;
 

@@ -44,10 +44,12 @@ Returns `{ contacts: [{ id, firstName, lastName, email, contactName, ... }] }`. 
 ### Get opportunities for a contact
 
 ```
-GET /contacts/{contactId}/opportunities
+GET /opportunities/search?location_id={loc}&contact_id={contactId}
 ```
 
 Returns `{ opportunities: [{ id, pipelineId, pipelineStageId, status, monetaryValue, ... }] }`.
+
+(The older `/contacts/{id}/opportunities` endpoint is documented in some GHL docs but currently returns 404. Use `/opportunities/search` instead.)
 
 ### Get all pipelines
 
