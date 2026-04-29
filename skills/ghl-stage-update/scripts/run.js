@@ -23,10 +23,9 @@ const RATE_WINDOW_MS = 10_000;
 const API_KEY = process.env.GHL_API_KEY;
 const LOCATION_ID = process.env.GHL_LOCATION_ID;
 
-if (!API_KEY || !LOCATION_ID) {
-  console.error('ERROR: GHL_API_KEY and GHL_LOCATION_ID must be set in the environment.');
-  console.error('See the SKILL.md prerequisites section for how to obtain them.');
-  process.exit(2);
+function fail(code, message) {
+  if (message) console.error(message);
+  process.exitCode = code;
 }
 
 let requestTimestamps = [];
@@ -153,6 +152,10 @@ function isoDate(d) {
 }
 
 async function main() {
+  if (!API_KEY || !LOCATION_ID) {
+    return fail(2, 'ERROR: GHL_API_KEY and GHL_LOCATION_ID must be set in the environment. See SKILL.md prerequisites.');
+  }
+
   const args = parseArgs(process.argv);
   const contactQuery = args.contact;
   const stageName = args.stage;
@@ -161,30 +164,27 @@ async function main() {
   const nextFollowUp = args['next-follow-up'] || null;
 
   if (!contactQuery || !stageName) {
-    console.error('Usage: node run.js --contact "<name or email>" --stage "<stage>" [--pipeline "<name>"] [--note "<text>"] [--next-follow-up YYYY-MM-DD]');
-    process.exit(2);
+    return fail(2, 'Usage: node run.js --contact "<name or email>" --stage "<stage>" [--pipeline "<name>"] [--note "<text>"] [--next-follow-up YYYY-MM-DD]');
   }
 
   // 1. Find the contact.
   const { match: contact, candidates } = await findContact(contactQuery);
   if (!contact) {
     if (candidates.length > 0) {
-      console.error(`Multiple matching contacts for "${contactQuery}". Please disambiguate:`);
+      let lines = [`Multiple matching contacts for "${contactQuery}". Please disambiguate:`];
       for (const c of candidates.slice(0, 10)) {
-        console.error(`  - ${c.firstName || ''} ${c.lastName || ''} <${c.email || 'no-email'}>  id=${c.id}`);
+        lines.push(`  - ${c.firstName || ''} ${c.lastName || ''} <${c.email || 'no-email'}>  id=${c.id}`);
       }
-      process.exit(3);
+      return fail(3, lines.join('\n'));
     }
-    console.error(`Contact not found: "${contactQuery}".`);
-    process.exit(4);
+    return fail(4, `Contact not found: "${contactQuery}".`);
   }
   const contactName = `${contact.firstName || ''} ${contact.lastName || ''}`.trim() || contact.contactName || contact.email;
 
   // 2. Find their opportunities.
   const opportunities = await getOpportunitiesForContact(contact.id);
   if (opportunities.length === 0) {
-    console.error(`No opportunities found for ${contactName}. Create one in GHL first.`);
-    process.exit(5);
+    return fail(5, `No opportunities found for ${contactName}. Create one in GHL first.`);
   }
 
   // 3. Get all pipelines, narrow to the requested pipeline if provided.
@@ -196,38 +196,36 @@ async function main() {
   if (pipelineName) {
     pipeline = findPipelineByName(pipelines, pipelineName);
     if (!pipeline) {
-      console.error(`Pipeline not found: "${pipelineName}". Available pipelines:`);
-      for (const p of pipelines) console.error(`  - ${p.name}`);
-      process.exit(6);
+      const lines = [`Pipeline not found: "${pipelineName}". Available pipelines:`];
+      for (const p of pipelines) lines.push(`  - ${p.name}`);
+      return fail(6, lines.join('\n'));
     }
     opportunity = opportunities.find(o => o.pipelineId === pipeline.id);
     if (!opportunity) {
-      console.error(`No opportunity for ${contactName} in pipeline "${pipeline.name}".`);
-      process.exit(7);
+      return fail(7, `No opportunity for ${contactName} in pipeline "${pipeline.name}".`);
     }
   } else {
     if (opportunities.length > 1) {
-      console.error(`${contactName} has opportunities in multiple pipelines. Please specify --pipeline:`);
+      const lines = [`${contactName} has opportunities in multiple pipelines. Please specify --pipeline:`];
       for (const o of opportunities) {
         const p = pipelines.find(pp => pp.id === o.pipelineId);
-        console.error(`  - ${p ? p.name : o.pipelineId}  (opportunity id=${o.id})`);
+        lines.push(`  - ${p ? p.name : o.pipelineId}  (opportunity id=${o.id})`);
       }
-      process.exit(8);
+      return fail(8, lines.join('\n'));
     }
     opportunity = opportunities[0];
     pipeline = pipelines.find(p => p.id === opportunity.pipelineId);
     if (!pipeline) {
-      console.error(`Opportunity ${opportunity.id} references pipeline ${opportunity.pipelineId} which was not returned by /pipelines. Aborting.`);
-      process.exit(9);
+      return fail(9, `Opportunity ${opportunity.id} references pipeline ${opportunity.pipelineId} which was not returned by /pipelines. Aborting.`);
     }
   }
 
   // 4. Find the target stage.
   const stage = findStageInPipeline(pipeline, stageName);
   if (!stage) {
-    console.error(`Stage "${stageName}" not found in pipeline "${pipeline.name}". Available stages:`);
-    for (const s of pipeline.stages || []) console.error(`  - ${s.name}`);
-    process.exit(10);
+    const lines = [`Stage "${stageName}" not found in pipeline "${pipeline.name}". Available stages:`];
+    for (const s of pipeline.stages || []) lines.push(`  - ${s.name}`);
+    return fail(10, lines.join('\n'));
   }
 
   // 5. Capture from-stage for the report.
@@ -286,5 +284,5 @@ async function main() {
 
 main().catch(err => {
   console.error(`Error: ${err.message}`);
-  process.exit(1);
+  process.exitCode = 1;
 });
