@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>claude-design-animation-capture example</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #1e293b;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        overflow: hidden;
+      }
+      #stage {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #title {
+        font-size: 14vw;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #f1f5f9;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      /* Stand-in for the Claude Design playback bar so capture.js's
+         hide-selector has something to hide during testing. */
+      #fake-playback-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 44px;
+        background: rgba(20, 20, 20, 0.92);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="title">Demo</div>
+    </div>
+    <div id="fake-playback-bar"></div>
+
+    <script>
+      // Minimal stand-in for the Claude Design Animation timeline contract.
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-1"] = { paused: true, start: 0, end: 6.0 };
+
+      const title = document.getElementById('title');
+      const DURATION = 6.0;       // seconds
+      const FADE_IN_END = 0.5;
+      const FADE_OUT_START = 5.5;
+
+      let startMs = null;
+
+      // Reset on Home key, matching the Stage contract capture.js relies on
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Home') {
+          startMs = performance.now();
+        }
+      });
+
+      function setOpacity(t) {
+        if (t < 0) {
+          title.style.opacity = '0';
+          title.style.transform = 'translateY(20px)';
+          return;
+        }
+        if (t <= FADE_IN_END) {
+          const k = t / FADE_IN_END;
+          title.style.opacity = String(k);
+          title.style.transform = `translateY(${20 - 20 * k}px)`;
+          return;
+        }
+        if (t < FADE_OUT_START) {
+          title.style.opacity = '1';
+          title.style.transform = 'translateY(0)';
+          return;
+        }
+        if (t < DURATION) {
+          const k = (t - FADE_OUT_START) / (DURATION - FADE_OUT_START);
+          title.style.opacity = String(1 - k);
+          title.style.transform = `translateY(${-20 * k}px)`;
+          return;
+        }
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(-20px)';
+      }
+
+      function tick(now) {
+        if (startMs === null) startMs = now;
+        const t = (now - startMs) / 1000;
+        setOpacity(t);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    </script>
+  </body>
+</html>

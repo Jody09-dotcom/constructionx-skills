@@ -235,6 +235,40 @@
         "pipeline",
         "uk"
       ]
+    },
+    {
+      "name": "claude-design-animation-capture",
+      "source": "./skills/claude-design-animation-capture",
+      "description": "Convert a Claude Design Animation export (ZIP or folder) into a clean 1080x1920 H.264 MP4 ready for Reels, Shorts, TikTok, or any social upload. Spins up a tiny local HTTP server to serve the React + Babel HTML, drives Playwright to record at the requested dimensions, runs ffmpeg to crop, trim, and transcode. Bridges the gap that Claude Design has no native MP4 export. Animation template only. Requires Playwright and ffmpeg installed locally.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jody Murfit",
+        "email": "admin@constructionx.ai"
+      },
+      "homepage": "https://constructionx.ai",
+      "repository": "https://github.com/Jody09-dotcom/constructionx-skills",
+      "license": "MIT",
+      "keywords": [
+        "claude-design",
+        "anthropic",
+        "animation",
+        "video",
+        "mp4",
+        "playwright",
+        "ffmpeg",
+        "social-media",
+        "reels",
+        "shorts",
+        "productivity"
+      ],
+      "category": "productivity",
+      "tags": [
+        "claude-design",
+        "animation",
+        "video",
+        "mp4",
+        "social"
+      ]
     }
   ]
 }

@@ -2,16 +2,19 @@
 
 ConstructionX AI is a Norfolk-based AI automation partner for small UK construction firms, founded by Jody Murfit after 30+ years in construction. This pack is a set of Claude Code skills written for how UK builders actually work. Site diaries, RAMS, CDM 2015, CIS, NHBC, toolbox talks. UK regs, UK conventions, UK language. Free, MIT, use them as you like.
 
+The pack also includes general utility skills like `ghl-stage-update` (move GoHighLevel pipeline stages from the command line) and `claude-design-animation-capture` (turn a Claude Design Animation export into an MP4). Tools that fit alongside construction work without being construction-specific.
+
 <p align="center">
-  <img src="assets/toolbox-talk-generator.png" width="100%" alt="ConstructionX Skills, latest release: toolbox-talk-generator" />
+  <img src="assets/claude-design-animation-capture.png" width="100%" alt="ConstructionX Skills, latest release: claude-design-animation-capture" />
 </p>
 
 <p align="center">
-  <img src="assets/site-diary.png" width="19%" alt="site-diary" />
-  <img src="assets/rams-generator.png" width="19%" alt="rams-generator" />
-  <img src="assets/cdm-2015-check.png" width="19%" alt="cdm-2015-check" />
-  <img src="assets/cis-verification.png" width="19%" alt="cis-verification" />
-  <img src="assets/nhbc-lookup.png" width="19%" alt="nhbc-lookup" />
+  <img src="assets/site-diary.png" width="16%" alt="site-diary" />
+  <img src="assets/rams-generator.png" width="16%" alt="rams-generator" />
+  <img src="assets/cdm-2015-check.png" width="16%" alt="cdm-2015-check" />
+  <img src="assets/cis-verification.png" width="16%" alt="cis-verification" />
+  <img src="assets/nhbc-lookup.png" width="16%" alt="nhbc-lookup" />
+  <img src="assets/toolbox-talk-generator.png" width="16%" alt="toolbox-talk-generator" />
 </p>
 
 ## Install
@@ -31,6 +34,8 @@ Then install any skill from the pack:
 /plugin install cis-verification@constructionx-skills
 /plugin install nhbc-lookup@constructionx-skills
 /plugin install toolbox-talk-generator@constructionx-skills
+/plugin install ghl-stage-update@constructionx-skills
+/plugin install claude-design-animation-capture@constructionx-skills
 ```
 
 ## Skills Included
@@ -43,6 +48,8 @@ Then install any skill from the pack:
 | <img src="assets/cis-verification.png" width="80" /> | **cis-verification** | Walks a contractor through HMRC CIS verification and calculates the correct deduction. 0/20/30% logic, materials exemption, CIS300 reminder. | "I have a subbie invoice for 2,400 pounds including 600 materials, verify them and work out the deduction." |
 | <img src="assets/nhbc-lookup.png" width="80" /> | **nhbc-lookup** | Looks up NHBC Standards chapter requirements for a build element. Returns chapter pointer, key requirements, common failure points, official URL. | "What does NHBC say about ground-bearing slab DPM installation?" |
 | <img src="assets/toolbox-talk-generator.png" width="120" /> | **toolbox-talk-generator** | Generates a 5-minute UK construction toolbox talk from a one-line risk topic. Real site examples, one question for the team, one specific "do this today" instruction, foreman sign-off block. | "Draft a toolbox talk on working at height for tomorrow morning's brief." |
+|  | **ghl-stage-update** | Move a GoHighLevel contact through pipeline stages with one command. Searches contact by name or email, finds the opportunity in the named pipeline, moves it, optionally appends a note and sets the next follow-up date. | "Move Karen Harris to Interested." |
+| <img src="assets/claude-design-animation-capture.png" width="120" /> | **claude-design-animation-capture** | Converts a Claude Design Animation ZIP export into a clean 1080x1920 H.264 MP4 ready for Reels, Shorts, TikTok. Spins up a local server, runs Playwright + ffmpeg headlessly. Animation template only. | "I exported my Claude Design Animation. Render it to MP4." |
 
 ## Who This Is For
 

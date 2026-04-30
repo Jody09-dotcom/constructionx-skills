@@ -1,0 +1,31 @@
+{
+  "name": "claude-design-animation-capture",
+  "version": "1.0.0",
+  "description": "Convert a Claude Design Animation export (ZIP or folder) to a 1080x1920 H.264 MP4 ready for socials.",
+  "main": "scripts/run.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "run": "node scripts/run.js"
+  },
+  "keywords": [
+    "claude-design",
+    "anthropic",
+    "animation",
+    "video",
+    "mp4",
+    "playwright",
+    "ffmpeg",
+    "social-media",
+    "reels",
+    "shorts"
+  ],
+  "author": "Jody Murfit <admin@constructionx.ai>",
+  "license": "MIT",
+  "homepage": "https://constructionx.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jody09-dotcom/constructionx-skills"
+  }
+}
