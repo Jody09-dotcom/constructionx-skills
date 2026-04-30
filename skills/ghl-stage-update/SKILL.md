@@ -94,15 +94,15 @@ Everything else (pipeline, note, next follow-up) is optional. If the contact has
 
 **Example 1, simple stage move:**
 
-> "Move Karen Harris to Interested"
+> "Move Sarah Mitchell to Interested"
 
-The skill searches for "Karen Harris", finds her opportunity, moves it to the "Interested" stage in the matching pipeline, reports back.
+The skill searches for "Sarah Mitchell", finds her opportunity, moves it to the "Interested" stage in the matching pipeline, reports back.
 
 **Example 2, with note and follow-up:**
 
-> "Move ryan@watts-electrical.co.uk to Booked Call, note 'Site visit Wed 22 Apr 5pm at his offices', next follow up next Wednesday"
+> "Move james@example-electrical.co.uk to Booked Call, note 'Site visit Wed 5pm at his offices', next follow up next Wednesday"
 
-The skill resolves "next Wednesday" to an ISO date, finds Ryan's opportunity, moves it, adds the note, sets the follow-up.
+The skill resolves "next Wednesday" to an ISO date, finds the opportunity, moves it, adds the note, sets the follow-up.
 
 **Example 3, ambiguous contact:**
 

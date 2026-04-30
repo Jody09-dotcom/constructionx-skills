@@ -5,8 +5,8 @@
  * Move a GoHighLevel contact through pipeline stages with one command.
  *
  * Usage:
- *   node run.js --contact "Karen Harris" --stage "Interested"
- *   node run.js --contact ryan@watts-electrical.co.uk --stage "Booked Call" \
+ *   node run.js --contact "Sarah Mitchell" --stage "Interested"
+ *   node run.js --contact james@example-electrical.co.uk --stage "Booked Call" \
  *               --pipeline "CXAI Pipeline" --note "Site visit Wed 5pm" \
  *               --next-follow-up 2026-05-06
  *
